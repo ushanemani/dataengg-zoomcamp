@@ -3,15 +3,15 @@
 with tripdata as 
 (
   select *,
-    row_number() over(partition by cast(vendorid as integer), pickup_datetime) as rn
-  from {{ source('staging','yellow_trips') }}
-  where vendorid is not null 
+    row_number() over(partition by cast(vendor_id as integer), pickup_datetime) as rn
+  from {{ source('staging','yellow_tripdata') }}
+  where vendor_id is not null 
 )
 select
    -- identifiers
-    {{ dbt_utils.surrogate_key(['vendorid', 'pickup_datetime']) }} as tripid,
-    cast(vendorid as integer) as vendorid,
-    cast(ratecodeid as integer) as ratecodeid,
+    {{ dbt_utils.surrogate_key(['vendor_id', 'pickup_datetime']) }} as tripid,
+    cast(vendor_id as integer) as vendor_id,
+    cast(rate_code as integer) as rate_code,
     cast(pickup_location_id as integer) as  pickup_locationid,
     cast(dropoff_location_id as integer) as dropoff_locationid,
     
@@ -33,7 +33,7 @@ select
     cast(tip_amount as numeric) as tip_amount,
     cast(tolls_amount as numeric) as tolls_amount,
     cast(0 as numeric) as ehail_fee,
-    cast(improvement_surcharge as numeric) as improvement_surcharge,
+    cast(imp_surcharge as numeric) as imp_surcharge,
     cast(total_amount as numeric) as total_amount,
     cast(payment_type as integer) as payment_type,
     {{ get_payment_type_description('payment_type') }} as payment_type_description, 
