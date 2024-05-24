@@ -7,6 +7,8 @@ CREATE TABLE  `dataengg-zoomcamp.trips_data_all.yellow_tripdata` as SELECT * FRO
 
 INSERT INTO  `dataengg-zoomcamp.trips_data_all.yellow_tripdata`  SELECT * FROM `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2020`;
 
+CREATE TABLE  `dataengg-zoomcamp.trips_data_all.taxi_zone_lookup` as SELECT * FROM `bigquery-public-data.new_york_taxi_trips.taxi_zone_geom`;
+
 
 
 -- Create a partitioned table from actual table
