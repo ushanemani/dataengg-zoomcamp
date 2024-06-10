@@ -172,4 +172,5 @@ week1_intro/docker_intro/ny_taxi_postgres_data/
 target/
 dbt_packages/
 logs/
+venv/
 # end dbt Cloud content
